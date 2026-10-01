@@ -21,8 +21,8 @@ const { Content } = await render(project);
     {tags.map((tag) => <li>#{tag}</li>)}
   </ul>
   <p class="contacts">
-    <span>[<a href={repo}>code</a>]</span>
-    {demo && <span>[<a href={demo}>demo</a>]</span>}
+    <a href={repo}>Code</a>
+    {demo && <a href={demo}>Demo</a>}
   </p>
   <div class="prose">
     <Content />

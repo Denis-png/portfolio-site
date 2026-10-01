@@ -16,8 +16,9 @@ const featured = (await getPublishedProjects()).filter((p) => p.data.featured).s
     <div class="contacts">
       {
         profile.contacts.map((contact) => (
-          <span>
-            [{contact.label}: <a href={contact.href}>{contact.text}</a>]
+          <span class="contact">
+            <span class="label">{contact.label}</span>
+            <a href={contact.href}>{contact.text}</a>
           </span>
         ))
       }
@@ -32,7 +33,7 @@ const featured = (await getPublishedProjects()).filter((p) => p.data.featured).s
           {featured.map((project) => <ProjectCard project={project} />)}
         </div>
         <p class="more">
-          <a href="/projects/">All projects →</a>
+          <a href="/projects/">All projects</a>
         </p>
       </section>
     )

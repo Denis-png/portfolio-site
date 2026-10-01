@@ -11,11 +11,9 @@ import { profile } from '../data/profile';
   <div class="contacts">
     {
       profile.contacts.map((contact) => (
-        <span>
-          [{contact.label}: <a href={contact.href}>{contact.text}</a>]
-        </span>
+        <span class="contact"><span class="label">{contact.label}</span><a href={contact.href}>{contact.text}</a></span>
       ))
     }
-    {profile.cv && <span>[CV: <a href={profile.cv}>download PDF</a>]</span>}
+    {profile.cv && <span class="contact"><span class="label">CV</span><a href={profile.cv}>Download PDF</a></span>}
   </div>
 </BaseLayout>

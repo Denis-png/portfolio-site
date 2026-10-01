@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../data/profile';
+import { resume } from '../data/resume';
+---
+
+<BaseLayout title="Resume" description={`Resume of ${profile.name}: experience, education and skills.`}>
+  <header class="resume-head">
+    <h1>{profile.name}</h1>
+    <p class="role">{resume.headline}</p>
+    <ul class="meta">
+      {resume.facts.map((fact) => <li>{fact}</li>)}
+    </ul>
+    <p>{resume.summary}</p>
+    <div class="contacts">
+      {
+        profile.contacts.map((contact) => (
+          <span class="contact">
+            <span class="label">{contact.label}</span>
+            <a href={contact.href}>{contact.text}</a>
+          </span>
+        ))
+      }
+      {
+        profile.cv && (
+          <span class="contact no-print">
+            <span class="label">PDF</span>
+            <a href={profile.cv}>Download CV</a>
+          </span>
+        )
+      }
+    </div>
+  </header>
+
+  <section>
+    <h2>Experience</h2>
+    {
+      resume.experience.map((job) => (
+        <article class="entry">
+          <div class="entry-head">
+            <h3>{job.role}</h3>
+            <p class="when">{job.period}</p>
+          </div>
+          <p class="where">{job.org}, {job.place}</p>
+          {job.intro && <p class="intro">{job.intro}</p>}
+          {job.bullets && <ul>{job.bullets.map((bullet) => <li>{bullet}</li>)}</ul>}
+        </article>
+      ))
+    }
+  </section>
+
+  <section>
+    <h2>Education</h2>
+    {
+      resume.education.map((item) => (
+        <article class="entry">
+          <div class="entry-head">
+            <h3>{item.degree}</h3>
+            <p class="when">{item.period}</p>
+          </div>
+          <p class="where">{item.school}, {item.place}</p>
+          {item.bullets && <ul>{item.bullets.map((bullet) => <li>{bullet}</li>)}</ul>}
+        </article>
+      ))
+    }
+  </section>
+
+  <section>
+    <h2>Technical skills</h2>
+    <dl class="skills">
+      {
+        resume.skills.map((group) => (
+          <>
+            <dt>{group.label}</dt>
+            <dd>{group.items}</dd>
+          </>
+        ))
+      }
+    </dl>
+  </section>
+
+  <section>
+    <h2>Languages</h2>
+    <p>{resume.spoken.map((entry) => `${entry.language} (${entry.level})`).join(', ')}</p>
+  </section>
+</BaseLayout>

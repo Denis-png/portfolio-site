@@ -1,17 +1,18 @@
-/* Design reference: https://github.com/imwqqz/wqqz.dev (monospace, centred nav, violet accent).
-   Colours and spacing are tokens on :root; the dark values override them below. */
+/* Structure follows https://github.com/imwqqz/wqqz.dev (centred nav, hero, list of items).
+   Palette, type and detailing are this site's own. One theme: graphite with an amber accent. */
 
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
 
-  --bg: oklch(99% 0.002 286);
-  --text: oklch(21% 0.006 286);
-  --muted: oklch(49% 0.012 286);
-  --accent: oklch(54% 0.22 293);
-  --border: oklch(90% 0.004 286);
-  --code-bg: oklch(96% 0.003 286);
+  --bg: #2b2d31;
+  --surface: #34373c;
+  --text: #e6e7e9;
+  --muted: #a3a7ae;
+  --border: #43464c;
+  --accent: #f0b34a;
 
-  --font: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -19,18 +20,7 @@
   --space-4: 1.5rem;
   --space-5: 3rem;
 
-  --content-width: 46rem;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: oklch(14.8% 0.004 286);
-    --text: oklch(92% 0.004 286);
-    --muted: oklch(65% 0.012 286);
-    --accent: oklch(71% 0.17 293.5);
-    --border: oklch(26.8% 0.006 286);
-    --code-bg: oklch(17.2% 0.004 286);
-  }
+  --content-width: 40rem;
 }
 
 *,
@@ -51,9 +41,14 @@ body {
   color: var(--text);
   background: var(--bg);
   font-family: var(--font);
-  font-size: 1rem;
-  line-height: 1.7;
+  font-optical-sizing: auto;
+  font-size: 1.0625rem;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
 /* Every direct child of <body> is a centred column. */
@@ -74,8 +69,9 @@ main {
 a {
   color: var(--text);
   text-decoration-line: underline;
-  text-decoration-color: color-mix(in oklch, var(--accent) 50%, transparent);
-  text-underline-offset: 0.2em;
+  text-decoration-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.22em;
   transition: color 120ms, text-decoration-color 120ms;
 }
 
@@ -98,25 +94,26 @@ img {
 h1,
 h2,
 h3 {
-  line-height: 1.25;
+  line-height: 1.2;
   margin: var(--space-4) 0 var(--space-2);
   text-wrap: balance;
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 2.25rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 h2 {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.375rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
 }
 
 h3 {
-  font-size: 1.05rem;
-  font-weight: 600;
+  font-size: 1.125rem;
+  font-weight: 650;
 }
 
 p {
@@ -142,8 +139,18 @@ nav {
 
 nav a {
   color: var(--muted);
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   text-decoration: none;
+}
+
+@media (max-width: 30rem) {
+  nav {
+    gap: var(--space-1) 0.875rem;
+  }
+
+  nav a {
+    font-size: 0.875rem;
+  }
 }
 
 nav a:hover {
@@ -152,19 +159,34 @@ nav a:hover {
 
 nav a[aria-current='page'] {
   color: var(--text);
-  font-weight: 500;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.4em;
 }
 
 /* Footer */
 body > footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-1) var(--space-4);
   padding-block: var(--space-4);
   color: var(--muted);
-  font-size: 0.8125rem;
-  text-align: center;
+  font-size: 0.875rem;
+}
+
+body > footer p {
+  margin: 0;
 }
 
 body > footer a {
   color: var(--muted);
+}
+
+body > footer a:hover {
+  color: var(--accent);
 }
 
 /* Home */
@@ -173,45 +195,54 @@ body > footer a {
 }
 
 .hero h1 {
-  margin-top: 0;
-  font-size: clamp(2rem, 7vw, 2.75rem);
+  margin: 0 0 var(--space-2);
+  font-size: clamp(2.5rem, 11vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
 }
 
 .hero .role {
   margin: 0 0 var(--space-4);
   color: var(--muted);
-  font-size: 1.125rem;
+  font-size: 1.25rem;
 }
 
+/* Contact rows: a muted label, then the link. Also used for the Code and Demo links of a project. */
 .contacts {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-1) var(--space-4);
-  margin-top: var(--space-4);
-  font-size: 0.875rem;
+  gap: var(--space-2) var(--space-4);
+  margin: var(--space-4) 0 0;
+  font-size: 0.9375rem;
 }
 
-.contacts a {
+.contact {
+  display: flex;
+  gap: var(--space-2);
+  align-items: baseline;
+}
+
+.contact .label {
   color: var(--muted);
 }
 
-.contacts a:hover {
-  color: var(--accent);
+/* Lists of projects and posts: rows divided by hairlines */
+.items {
+  margin: var(--space-3) 0 0;
+  border-bottom: 1px solid var(--border);
 }
 
-/* Lists of projects and posts */
-.items {
-  display: grid;
-  gap: var(--space-4);
-  margin: var(--space-4) 0 0;
-  padding: 0;
-  list-style: none;
+.item {
+  padding-block: var(--space-3);
+  border-top: 1px solid var(--border);
 }
 
 .item h2,
 .item h3 {
   margin: 0;
-  font-size: 1.05rem;
+  font-size: 1.125rem;
+  letter-spacing: 0;
 }
 
 .item h2 a,
@@ -222,12 +253,13 @@ body > footer a {
 .item h2 a:hover,
 .item h3 a:hover {
   text-decoration: underline;
+  text-decoration-color: var(--accent);
 }
 
 .item p {
   margin: var(--space-1) 0 0;
   color: var(--muted);
-  font-size: 0.9375rem;
+  font-size: 1rem;
 }
 
 .meta {
@@ -238,12 +270,12 @@ body > footer a {
   padding: 0;
   list-style: none;
   color: var(--muted);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
 }
 
 .more {
-  margin-top: var(--space-4);
-  font-size: 0.875rem;
+  margin-top: var(--space-3);
+  font-size: 0.9375rem;
 }
 
 /* Rendered Markdown (case studies and posts) */
@@ -283,16 +315,16 @@ body > footer a {
 .prose code {
   padding: 0.1em 0.35em;
   border-radius: 4px;
-  background: var(--code-bg);
-  font-family: inherit;
-  font-size: 0.9em;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 0.85em;
 }
 
 .prose pre {
   margin: var(--space-3) 0;
   padding: var(--space-3);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 8px;
   overflow-x: auto;
   font-size: 0.85rem;
   line-height: 1.55;
@@ -301,6 +333,7 @@ body > footer a {
 .prose pre code {
   padding: 0;
   background: none;
+  font-size: inherit;
 }
 
 .prose table {
@@ -309,7 +342,7 @@ body > footer a {
   margin: var(--space-3) 0;
   overflow-x: auto;
   border-collapse: collapse;
-  font-size: 0.9rem;
+  font-size: 0.9375rem;
 }
 
 .prose th,
@@ -321,11 +354,11 @@ body > footer a {
 }
 
 .prose th {
-  font-weight: 600;
+  font-weight: 650;
 }
 
 .prose img {
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 .prose .katex-display {
@@ -333,15 +366,163 @@ body > footer a {
   overflow-y: hidden;
 }
 
-/* Code blocks: Shiki writes the light theme inline and exposes the dark one as variables,
-   so dark mode has to override the inline colours with !important. */
-@media (prefers-color-scheme: dark) {
-  .astro-code {
-    color: var(--shiki-dark) !important;
-    background-color: var(--shiki-dark-bg) !important;
+@media (prefers-reduced-motion: reduce) {
+  a {
+    transition: none;
+  }
+}
+
+/* Resume page */
+.resume-head h1 {
+  margin-top: var(--space-3);
+  font-size: clamp(2rem, 8vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.resume-head .role {
+  margin: 0 0 var(--space-2);
+  color: var(--muted);
+  font-size: 1.125rem;
+}
+
+.resume-head .meta {
+  margin: 0 0 var(--space-3);
+}
+
+section > h2 {
+  margin-top: var(--space-5);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.entry {
+  margin-top: var(--space-4);
+}
+
+.entry-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0 var(--space-4);
+}
+
+.entry-head h3 {
+  margin: 0;
+}
+
+.entry .when {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  white-space: nowrap;
+}
+
+.entry .where {
+  margin: 0 0 var(--space-2);
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.entry .intro {
+  margin: 0 0 var(--space-2);
+}
+
+.entry ul {
+  margin: 0;
+  padding-left: var(--space-4);
+}
+
+.entry li + li {
+  margin-top: var(--space-1);
+}
+
+.skills {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--space-1) var(--space-4);
+  margin: var(--space-3) 0 0;
+}
+
+.skills dt {
+  color: var(--muted);
+}
+
+.skills dd {
+  margin: 0;
+}
+
+@media (max-width: 30rem) {
+  .skills {
+    grid-template-columns: 1fr;
+    gap: 0;
   }
 
-  .astro-code span {
-    color: var(--shiki-dark) !important;
+  .skills dd {
+    margin-bottom: var(--space-2);
+  }
+}
+
+/* Printing the resume (or any page): light, one column, no site chrome. */
+@page {
+  size: A4;
+  margin: 14mm 16mm;
+}
+
+@media print {
+  :root {
+    color-scheme: light;
+    --bg: #fff;
+    --text: #111;
+    --muted: #444;
+    --border: #bbb;
+    --accent: #111;
+    --surface: #eee;
+  }
+
+  body {
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
+
+  body > header,
+  body > footer,
+  .no-print {
+    display: none;
+  }
+
+  body > main {
+    max-width: none;
+    padding: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .entry,
+  section > h2 {
+    break-inside: avoid;
+  }
+
+  section > h2 {
+    break-after: avoid;
+  }
+
+  .skills {
+    grid-template-columns: max-content 1fr;
+  }
+
+  section > h2 {
+    margin-top: var(--space-4);
+  }
+
+  .entry {
+    margin-top: var(--space-3);
+  }
+
+  .resume-head h1 {
+    margin-top: 0;
   }
 }

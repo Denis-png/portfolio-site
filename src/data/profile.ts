@@ -16,11 +16,12 @@ export const profile = {
   // Paragraphs on the About page. Replace with your own background.
   about: ['A short background goes here: where you started, what you work on, what you are after.'],
   // Path of your CV inside public/, for example '/cv.pdf'. While null, the link is hidden.
-  cv: null as string | null,
+  cv: '/CV-EU.pdf' as string | null,
   description: 'Portfolio of Denis Maxheimer, machine learning engineer.',
   repo: 'https://github.com/Denis-png/portfolio-site',
   contacts: [
     { label: 'GitHub', text: 'Denis-png', href: 'https://github.com/Denis-png' },
+    { label: 'LinkedIn', text: 'denis-maxheimer', href: 'https://www.linkedin.com/in/denis-maxheimer' },
     { label: 'Email', text: 'denismaxheimer@gmail.com', href: 'mailto:denismaxheimer@gmail.com' },
   ] satisfies ContactLink[],
 };
@@ -29,5 +30,6 @@ export const nav = [
   { href: '/', label: 'Home' },
   { href: '/projects/', label: 'Projects' },
   { href: '/posts/', label: 'Posts' },
+  { href: '/resume/', label: 'Resume' },
   { href: '/about/', label: 'About' },
 ];
