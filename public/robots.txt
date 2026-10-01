@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://portfolio-site.denismaxheimer.workers.dev/sitemap-index.xml
+Sitemap: https://portfolio.denispng.com/sitemap-index.xml

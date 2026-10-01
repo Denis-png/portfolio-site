@@ -4,7 +4,7 @@ summary: A draft that shows what a project card and case study look like. Visibl
 date: 2026-09-15
 tags: [numpy, from-scratch]
 repo: https://github.com/Denis-png/portfolio-site
-demo: https://portfolio-site.denismaxheimer.workers.dev
+demo: https://portfolio.denispng.com
 featured: true
 draft: true
 ---

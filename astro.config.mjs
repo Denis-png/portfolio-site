@@ -10,7 +10,7 @@ import rehypeExternalLinks from 'rehype-external-links';
 export default defineConfig({
   // Used for the sitemap, canonical links and social-preview URLs.
   // Change it when the custom domain is attached.
-  site: 'https://portfolio-site.denismaxheimer.workers.dev',
+  site: 'https://portfolio.denispng.com',
   integrations: [sitemap()],
   markdown: {
     // Astro 7's default Markdown processor does not run remark/rehype plugins,

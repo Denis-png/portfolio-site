@@ -32,7 +32,6 @@ Air quality affects health directly, but the data behind it is spread across sou
 ## What I'd do differently
 
 - The 20% and 60% thresholds were chosen by looking at the resulting values, not validated against anything. They would need a proper justification, or a standard such as health-based limits.
-- A new sensor is classified against its own history, so it gets no label for a year.
 - There are no automated tests, only scratch scripts, and the pipeline's stages are run as separate scripts. A rework would add tests and make each stage easy to run and check on its own.
 
 That rework has started as [breathin_v2](/projects/breathin_v2_project/).
