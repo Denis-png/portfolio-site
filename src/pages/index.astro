@@ -23,6 +23,14 @@ const featured = (await getPublishedProjects()).filter((p) => p.data.featured).s
           </span>
         ))
       }
+      {
+        profile.cv && (
+          <span class="contact">
+            <span class="label">CV</span>
+            <ExternalLink href={profile.cv}>Download PDF</ExternalLink>
+          </span>
+        )
+      }
     </div>
   </section>
 

@@ -10,11 +10,9 @@ export interface ContactLink {
 export const profile = {
   name: 'Denis Maxheimer',
   role: 'Machine learning engineer',
-  // Shown on the home page under the role. Replace with your own words.
-  bio: 'Short bio goes here: who you are and what you build.',
-  note: 'One more line goes here: what you are looking for.',
-  // Paragraphs on the About page. Replace with your own background.
-  about: ['A short background goes here: where you started, what you work on, what you are after.'],
+  // Shown on the first page (About) under the role. Replace with your own words.
+  bio: 'I am finishing an MSc in Data Science at the University of Mannheim, with primary interests in LLM\'s, Evaluation and Benchmarking, DevOps and Self-Hosting.',
+  note: 'Looking for a full-time job, remote or located in Prague, ready to start from January 2027.',
   // Path of your CV inside public/, for example '/cv.pdf'. While null, the link is hidden.
   cv: '/CV-EU.pdf' as string | null,
   description: 'Portfolio of Denis Maxheimer, machine learning engineer.',
@@ -27,8 +25,7 @@ export const profile = {
 };
 
 export const nav = [
-  { href: '/', label: 'Home' },
+  { href: '/', label: 'About' },
   { href: '/projects/', label: 'Projects' },
   { href: '/resume/', label: 'Resume' },
-  { href: '/about/', label: 'About' },
 ];
