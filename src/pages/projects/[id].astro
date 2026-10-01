@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { title, summary, date, tags, repo, demo } = project.data;
+const { title, summary, date, tags, repo, demo, report, links } = project.data;
 const { Content } = await render(project);
 ---
 
@@ -24,6 +24,8 @@ const { Content } = await render(project);
   <p class="contacts">
     <ExternalLink href={repo}>Code</ExternalLink>
     {demo && <ExternalLink href={demo}>Demo</ExternalLink>}
+    {report && <ExternalLink href={report}>Report (PDF)</ExternalLink>}
+    {links.map((link) => <ExternalLink href={link.href}>{link.label}</ExternalLink>)}
   </p>
   <div class="prose">
     <Content />

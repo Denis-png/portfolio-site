@@ -11,6 +11,10 @@ const projects = defineCollection({
     tags: z.array(z.string()).default([]),
     repo: z.url(),
     demo: z.url().optional(),
+    // Path of a PDF report inside public/, for example '/report.pdf'.
+    report: z.string().startsWith('/').optional(),
+    // Further links, for example a second repository.
+    links: z.array(z.object({ label: z.string(), href: z.url() })).default([]),
     featured: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),
