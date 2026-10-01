@@ -15,6 +15,8 @@ const projects = defineCollection({
     report: z.string().startsWith('/').optional(),
     // Further links, for example a second repository.
     links: z.array(z.object({ label: z.string(), href: z.url() })).default([]),
+    // Where the project stands. Shown as a coloured dot and a label.
+    status: z.enum(['completed', 'ongoing', 'planned']).default('completed'),
     featured: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),

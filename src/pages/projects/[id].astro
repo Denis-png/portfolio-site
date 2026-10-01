@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import 'katex/dist/katex.min.css';
+import StatusBadge from '../../components/StatusBadge.astro';
 import ExternalLink from '../../components/ExternalLink.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getPublishedProjects, formatDate } from '../../lib/content';
@@ -11,13 +12,14 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { title, summary, date, tags, repo, demo, report, links } = project.data;
+const { title, summary, date, tags, repo, demo, report, links, status } = project.data;
 const { Content } = await render(project);
 ---
 
 <BaseLayout title={title} description={summary}>
   <h1>{title}</h1>
   <ul class="meta">
+    <li><StatusBadge status={status} /></li>
     <li><time datetime={date.toISOString()}>{formatDate(date)}</time></li>
     {tags.map((tag) => <li>#{tag}</li>)}
   </ul>

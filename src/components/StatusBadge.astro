@@ -1,0 +1,10 @@
+---
+interface Props {
+  status: 'completed' | 'ongoing' | 'planned';
+}
+
+const { status } = Astro.props;
+const labels = { completed: 'Completed', ongoing: 'Ongoing', planned: 'Planned' };
+---
+
+<span class={`status status-${status}`}>{labels[status]}</span>

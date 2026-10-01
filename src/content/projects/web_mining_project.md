@@ -5,7 +5,7 @@ date: 2025-05-25
 tags: [recommender-systems, pytorch-geometric, lightgbm, graph-neural-networks]
 repo: https://github.com/Frederik-Roeckle/xwines_recom
 report: /Web_Mining_Project_Report_Group_5.pdf
-featured: true
+featured: false
 ---
 
 University of Mannheim, Web Mining course. A team of five.

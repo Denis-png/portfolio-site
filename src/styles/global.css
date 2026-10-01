@@ -10,6 +10,7 @@
   --muted: #a3a7ae;
   --border: #43464c;
   --accent: #f0b34a;
+  --done: #8fc79a;
 
   --font: 'Bricolage Grotesque Variable', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -276,6 +277,33 @@ body > footer a:hover {
 .more {
   margin-top: var(--space-3);
   font-size: 0.9375rem;
+}
+
+/* Project status: a dot that differs in fill as well as colour, next to the label. */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.status::before {
+  content: '';
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 1.5px solid transparent;
+  border-radius: 50%;
+}
+
+.status-completed::before {
+  background: var(--done);
+}
+
+.status-ongoing::before {
+  background: var(--accent);
+}
+
+.status-planned::before {
+  border-color: var(--muted);
 }
 
 /* Rendered Markdown (case studies and posts) */
