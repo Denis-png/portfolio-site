@@ -1,17 +1,40 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { profile } from '../data/profile';
+import { getPublishedProjects } from '../lib/content';
 
+const featured = (await getPublishedProjects()).filter((p) => p.data.featured).slice(0, 3);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Denis Maxheimer</title>
-	</head>
-	<body>
-		<h1>Denis Maxheimer</h1>
-	</body>
-</html>
+<BaseLayout>
+  <section class="hero">
+    <h1>{profile.name}</h1>
+    <p class="role">{profile.role}</p>
+    <p>{profile.bio}</p>
+    <p>{profile.note}</p>
+    <div class="contacts">
+      {
+        profile.contacts.map((contact) => (
+          <span>
+            [{contact.label}: <a href={contact.href}>{contact.text}</a>]
+          </span>
+        ))
+      }
+    </div>
+  </section>
+
+  {
+    featured.length > 0 && (
+      <section>
+        <h2>Selected projects</h2>
+        <div class="items">
+          {featured.map((project) => <ProjectCard project={project} />)}
+        </div>
+        <p class="more">
+          <a href="/projects/">All projects →</a>
+        </p>
+      </section>
+    )
+  }
+</BaseLayout>

@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../data/profile';
+---
+
+<BaseLayout title="About" description={`About ${profile.name}.`}>
+  <h1>About</h1>
+  <div class="prose">
+    {profile.about.map((paragraph) => <p>{paragraph}</p>)}
+  </div>
+  <div class="contacts">
+    {
+      profile.contacts.map((contact) => (
+        <span>
+          [{contact.label}: <a href={contact.href}>{contact.text}</a>]
+        </span>
+      ))
+    }
+    {profile.cv && <span>[CV: <a href={profile.cv}>download PDF</a>]</span>}
+  </div>
+</BaseLayout>

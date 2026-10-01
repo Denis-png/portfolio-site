@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getPublishedProjects } from '../../lib/content';
+
+const projects = await getPublishedProjects();
+---
+
+<BaseLayout title="Projects" description="Machine learning projects with write-ups, results and code.">
+  <h1>Projects</h1>
+  {
+    projects.length > 0 ? (
+      <div class="items">
+        {projects.map((project) => <ProjectCard project={project} />)}
+      </div>
+    ) : (
+      <p class="muted">No projects yet.</p>
+    )
+  }
+</BaseLayout>

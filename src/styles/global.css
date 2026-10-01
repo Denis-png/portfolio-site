@@ -1,0 +1,347 @@
+/* Design reference: https://github.com/imwqqz/wqqz.dev (monospace, centred nav, violet accent).
+   Colours and spacing are tokens on :root; the dark values override them below. */
+
+:root {
+  color-scheme: light dark;
+
+  --bg: oklch(99% 0.002 286);
+  --text: oklch(21% 0.006 286);
+  --muted: oklch(49% 0.012 286);
+  --accent: oklch(54% 0.22 293);
+  --border: oklch(90% 0.004 286);
+  --code-bg: oklch(96% 0.003 286);
+
+  --font: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 3rem;
+
+  --content-width: 46rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: oklch(14.8% 0.004 286);
+    --text: oklch(92% 0.004 286);
+    --muted: oklch(65% 0.012 286);
+    --accent: oklch(71% 0.17 293.5);
+    --border: oklch(26.8% 0.006 286);
+    --code-bg: oklch(17.2% 0.004 286);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--text);
+  background: var(--bg);
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Every direct child of <body> is a centred column. */
+body > header,
+body > main,
+body > footer {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+main {
+  flex: 1;
+  padding-block: var(--space-4) var(--space-5);
+}
+
+a {
+  color: var(--text);
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in oklch, var(--accent) 50%, transparent);
+  text-underline-offset: 0.2em;
+  transition: color 120ms, text-decoration-color 120ms;
+}
+
+a:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+  margin: var(--space-4) 0 var(--space-2);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+p {
+  margin: 0 0 var(--space-3);
+  text-wrap: pretty;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* Header: centred navigation */
+body > header {
+  padding-block: var(--space-3);
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-1) var(--space-4);
+}
+
+nav a {
+  color: var(--muted);
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: var(--text);
+}
+
+nav a[aria-current='page'] {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* Footer */
+body > footer {
+  padding-block: var(--space-4);
+  color: var(--muted);
+  font-size: 0.8125rem;
+  text-align: center;
+}
+
+body > footer a {
+  color: var(--muted);
+}
+
+/* Home */
+.hero {
+  padding-block: var(--space-5) var(--space-4);
+}
+
+.hero h1 {
+  margin-top: 0;
+  font-size: clamp(2rem, 7vw, 2.75rem);
+}
+
+.hero .role {
+  margin: 0 0 var(--space-4);
+  color: var(--muted);
+  font-size: 1.125rem;
+}
+
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  margin-top: var(--space-4);
+  font-size: 0.875rem;
+}
+
+.contacts a {
+  color: var(--muted);
+}
+
+.contacts a:hover {
+  color: var(--accent);
+}
+
+/* Lists of projects and posts */
+.items {
+  display: grid;
+  gap: var(--space-4);
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item h2,
+.item h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.item h2 a,
+.item h3 a {
+  text-decoration: none;
+}
+
+.item h2 a:hover,
+.item h3 a:hover {
+  text-decoration: underline;
+}
+
+.item p {
+  margin: var(--space-1) 0 0;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-3);
+  margin: var(--space-1) 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+.more {
+  margin-top: var(--space-4);
+  font-size: 0.875rem;
+}
+
+/* Rendered Markdown (case studies and posts) */
+.prose {
+  margin-top: var(--space-4);
+}
+
+.prose > :first-child {
+  margin-top: 0;
+}
+
+.prose h2 {
+  margin-top: var(--space-5);
+}
+
+.prose ul,
+.prose ol {
+  margin: 0 0 var(--space-3);
+  padding-left: var(--space-4);
+}
+
+.prose li + li {
+  margin-top: var(--space-1);
+}
+
+.prose a {
+  text-decoration-color: var(--accent);
+}
+
+.prose blockquote {
+  margin: var(--space-3) 0;
+  padding-left: var(--space-3);
+  border-left: 2px solid var(--accent);
+  color: var(--muted);
+}
+
+.prose code {
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: var(--code-bg);
+  font-family: inherit;
+  font-size: 0.9em;
+}
+
+.prose pre {
+  margin: var(--space-3) 0;
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.prose pre code {
+  padding: 0;
+  background: none;
+}
+
+.prose table {
+  display: block;
+  max-width: 100%;
+  margin: var(--space-3) 0;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.prose th,
+.prose td {
+  padding: var(--space-1) var(--space-3);
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.prose th {
+  font-weight: 600;
+}
+
+.prose img {
+  border-radius: 6px;
+}
+
+.prose .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Code blocks: Shiki writes the light theme inline and exposes the dark one as variables,
+   so dark mode has to override the inline colours with !important. */
+@media (prefers-color-scheme: dark) {
+  .astro-code {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+  }
+
+  .astro-code span {
+    color: var(--shiki-dark) !important;
+  }
+}
