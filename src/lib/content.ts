@@ -14,10 +14,6 @@ export async function getPublishedProjects(): Promise<CollectionEntry<'projects'
   return (await getCollection('projects', isPublished)).sort(newestFirst);
 }
 
-export async function getPublishedPosts(): Promise<CollectionEntry<'posts'>[]> {
-  return (await getCollection('posts', isPublished)).sort(newestFirst);
-}
-
 // Frontmatter dates are midnight UTC, so format in UTC or the day shifts west of Greenwich.
 export function formatDate(date: Date): string {
   return date.toLocaleDateString('en-GB', {

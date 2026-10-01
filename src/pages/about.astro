@@ -1,4 +1,5 @@
 ---
+import ExternalLink from '../components/ExternalLink.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { profile } from '../data/profile';
 ---
@@ -11,9 +12,9 @@ import { profile } from '../data/profile';
   <div class="contacts">
     {
       profile.contacts.map((contact) => (
-        <span class="contact"><span class="label">{contact.label}</span><a href={contact.href}>{contact.text}</a></span>
+        <span class="contact"><span class="label">{contact.label}</span><ExternalLink href={contact.href}>{contact.text}</ExternalLink></span>
       ))
     }
-    {profile.cv && <span class="contact"><span class="label">CV</span><a href={profile.cv}>Download PDF</a></span>}
+    {profile.cv && <span class="contact"><span class="label">CV</span><ExternalLink href={profile.cv}>Download PDF</ExternalLink></span>}
   </div>
 </BaseLayout>

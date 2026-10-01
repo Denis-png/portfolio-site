@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ExternalLink from '../components/ExternalLink.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { profile } from '../data/profile';
 import { getPublishedProjects } from '../lib/content';
@@ -18,7 +19,7 @@ const featured = (await getPublishedProjects()).filter((p) => p.data.featured).s
         profile.contacts.map((contact) => (
           <span class="contact">
             <span class="label">{contact.label}</span>
-            <a href={contact.href}>{contact.text}</a>
+            <ExternalLink href={contact.href}>{contact.text}</ExternalLink>
           </span>
         ))
       }

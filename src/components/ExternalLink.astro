@@ -1,0 +1,12 @@
+---
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+
+// Web addresses and PDFs open in a new tab; mailto: links and the site's own pages do not.
+const newTab = /^https?:\/\//.test(href) || href.endsWith('.pdf');
+---
+
+<a href={href} target={newTab ? '_blank' : undefined} rel={newTab ? 'noopener noreferrer' : undefined}><slot /></a>

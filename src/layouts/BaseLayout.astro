@@ -2,6 +2,7 @@
 import '@fontsource-variable/bricolage-grotesque/opsz.css';
 import '@fontsource-variable/jetbrains-mono';
 import '../styles/global.css';
+import ExternalLink from '../components/ExternalLink.astro';
 import { profile, nav } from '../data/profile';
 
 interface Props {
@@ -59,7 +60,7 @@ const isCurrent = (href: string) =>
     </main>
     <footer>
       <p>© {new Date().getFullYear()} {profile.name}</p>
-      <a href={profile.repo}>Source code</a>
+      <ExternalLink href={profile.repo}>Source code</ExternalLink>
     </footer>
   </body>
 </html>

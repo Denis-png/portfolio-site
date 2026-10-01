@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import 'katex/dist/katex.min.css';
+import ExternalLink from '../../components/ExternalLink.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getPublishedProjects, formatDate } from '../../lib/content';
 
@@ -21,8 +22,8 @@ const { Content } = await render(project);
     {tags.map((tag) => <li>#{tag}</li>)}
   </ul>
   <p class="contacts">
-    <a href={repo}>Code</a>
-    {demo && <a href={demo}>Demo</a>}
+    <ExternalLink href={repo}>Code</ExternalLink>
+    {demo && <ExternalLink href={demo}>Demo</ExternalLink>}
   </p>
   <div class="prose">
     <Content />

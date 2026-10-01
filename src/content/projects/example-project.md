@@ -28,7 +28,7 @@ Numbers go here: accuracy, latency, cost.
 
 ## What I'd do differently
 
-The honest part.
+The honest part. Links in the text, such as [the source on GitHub](https://github.com/Denis-png/portfolio-site), open in a new tab.
 
 ## How to run it
 
